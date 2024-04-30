@@ -68,7 +68,7 @@ Forwarded from a tradional wisp CONNECT packet. Server should generate an increm
 #### Behavior
 Forwarded from a tradional wisp DATA packet. Data should be reused from the connect packet that started the stream.
 
-### 0x04 - FWD_EXIT
+### 0x05 - FWD_EXIT
 #### Format
 | Field Name    | Field Type | Notes                                           |
 |---------------|------------|-------------------------------------------------|
@@ -112,6 +112,16 @@ Sent to open a socket on the Wisp Node.
 #### Behavior
 Packet should be forwarded to a client as a standard DATA packet once read by the Wisp Node.
 
+### 0x05 - SERVER_EXIT
+#### Format
+| Field Name    | Field Type | Notes                                                  |
+|---------------|------------|--------------------------------------------------------|
+| Client ID     | uint32_t   | The ID of the browser that needs to receive the packet |
+| Connection ID | uint32_t   | Same as the ID thats was sent to it.                   |
+| Port          | uint16_t   | The port that is responding.                           |
+
+#### Behavior
+Packet should be forwarded to a client as a standard EXIT packet once read by the Wisp Node. This should be sent once all data has been sent.
 
 # Wisp Changes
 
