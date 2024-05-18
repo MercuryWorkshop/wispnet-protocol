@@ -2,6 +2,44 @@
 
 Version 1.0.0 Draft 1 written by @FoxMoss
 
+<!--toc:start-->
+- [WispNet Protocol](#wispnet-protocol)
+  - [Notes](#notes)
+  - [Packet Types](#packet-types)
+  - [Server Sent Packets](#server-sent-packets)
+    - [0x01 - REGISTERED](#0x01-registered)
+      - [Format](#format)
+      - [Behavior](#behavior)
+    - [0x02 - REGISTRY](#0x02-registry)
+      - [Format](#format)
+      - [Behavior](#behavior)
+      - [Socket Struct](#socket-struct)
+    - [0x03 - FWD_CONNECT](#0x03-fwdconnect)
+      - [Format](#format)
+      - [Behavior](#behavior)
+    - [0x04 - FWD_DATA](#0x04-fwddata)
+      - [Format](#format)
+      - [Behavior](#behavior)
+    - [0x05 - FWD_EXIT](#0x05-fwdexit)
+      - [Format](#format)
+      - [Behavior](#behavior)
+  - [Browser Sent Packets](#browser-sent-packets)
+    - [0x01 - PROBE](#0x01-probe)
+      - [Format](#format)
+      - [Behavior](#behavior)
+    - [0x02 - OPEN](#0x02-open)
+      - [Format](#format)
+      - [Behavior](#behavior)
+    - [0x03 - SERVER_DATA](#0x03-serverdata)
+      - [Format](#format)
+      - [Behavior](#behavior)
+    - [0x04 - SERVER_EXIT](#0x04-serverexit)
+      - [Format](#format)
+      - [Behavior](#behavior)
+- [Wisp Changes](#wisp-changes)
+<!--toc:end-->
+
+
 ## Notes
 
 Previously what was called the client is now called the browser or a device. Do to the fact that a browser can now create a server and in many cases a browser is a client with another being a server.
@@ -54,7 +92,7 @@ Sent by the server in response to a probe packet. Sends all discoverable ports o
 | Port          | uint16_t   | Same as the wisp packet.                                    |
 
 #### Behavior
-Forwarded from a tradional wisp CONNECT packet. Server should generate an incrementing or random connection ID and store the data on the stream for future use.
+Forwarded from a traditional wisp CONNECT packet. Server should generate an incrementing or random connection ID and store the data on the stream for future use.
 
 ### 0x04 - FWD_DATA
 #### Format
@@ -66,7 +104,7 @@ Forwarded from a tradional wisp CONNECT packet. Server should generate an increm
 | Data          | ...        | Copied from wisp packet.                        |
 
 #### Behavior
-Forwarded from a tradional wisp DATA packet. Data should be reused from the connect packet that started the stream.
+Forwarded from a traditional wisp DATA packet. Data should be reused from the connect packet that started the stream.
 
 ### 0x05 - FWD_EXIT
 #### Format
@@ -77,7 +115,7 @@ Forwarded from a tradional wisp DATA packet. Data should be reused from the conn
 | Port          | uint16_t   | Same as the wisp packet.                        |
 
 #### Behavior
-Sent when a wisp stream exits, or the device wisp websocket closes.
+Sent when a wisp stream exits, or the device wisp web socket closes.
 
 ## Browser Sent Packets
 
@@ -112,7 +150,7 @@ Sent to open a socket on the Wisp Node.
 #### Behavior
 Packet should be forwarded to a client as a standard DATA packet once read by the Wisp Node.
 
-### 0x05 - SERVER_EXIT
+### 0x04 - SERVER_EXIT
 #### Format
 | Field Name    | Field Type | Notes                                                  |
 |---------------|------------|--------------------------------------------------------|
@@ -125,4 +163,4 @@ Packet should be forwarded to a client as a standard EXIT packet once read by th
 
 # Wisp Changes
 
-WispNet maintains backwards compatability with any standard wisp server, except parsing hostnames on CONNECT packets. If a connection is made for the `wispnet` hostname open a TCP stream to your own internal WispNet server as defined above. If the hostname ends with `.wisp` then interpret the begining section as a base64 encoded WispNet device ID.
+WispNet maintains backwards compatibility with any standard wisp server, except parsing hostnames on CONNECT packets. If a connection is made for the `wispnet` hostname open a TCP stream to your own internal WispNet server as defined above. If the hostname ends with `.wisp` then interpret the beginning section as a base64 encoded WispNet device ID.
