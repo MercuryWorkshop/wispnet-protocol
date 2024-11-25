@@ -3,7 +3,7 @@
 Version 2.0.0 Draft 1 written by @FoxMoss and @r58playz
 
 ## Wisp Changes
-WispNet maintains backwards compatibility with any standard Wisp server, except parsing hostnames on CONNECT packets. If a connection is made for the `wispnet` hostname open a TCP stream to your own internal WispNet server as defined above. If the hostname ends with `.wisp` then interpret the beginning section as a base64 encoded WispNet device ID.
+WispNet maintains backwards compatibility with any standard Wisp server, except parsing hostnames on CONNECT packets. If the hostname ends with `.wisp` then interpret the beginning section as a base64 encoded WispNet device ID.
 
 WispNet has its own endpoint on the server for clients that want to listen for connections from others. It is not necessary to connect to this endpoint if you are only connecting to other WispNet clients. Currently the endpoint is `WISP_PREFIX/?net`.
 
