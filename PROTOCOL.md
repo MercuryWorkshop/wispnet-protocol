@@ -9,7 +9,7 @@ WispNet has its own endpoint on the server for clients that want to listen for c
 
 Once the client connects to the WispNet endpoint, it must act as a Wisp server with only the WispNet protocol extension supported and required. The WispNet server must act as a Wisp client with only the WispNet protocol extension supported and required.
 
-## Protocol Extension
+## Protocol Extension ID `0xF1` - WispNet
 This protocol extension should only be used on the WispNet endpoint.
 
 ### Server (WispNet Client) Message
